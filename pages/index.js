@@ -2,33 +2,38 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import React, { useState, useEffect } from "react";
 import Post from "../components/Post";
+import "antd/dist/antd.css";
+import { Button } from "antd";
 
-export default function Home({ posts }) {
-  console.log(posts);
+import { questionData } from "../questions";
+
+export default function Home({ questions }) {
   const [count, setCount] = useState(0);
-  useEffect(() => {
-    console.log(posts, "pppp");
 
+  useEffect(() => {
     const timer = setInterval(() => setCount((n) => n + 1), 1000);
     return () => {
       clearInterval(timer);
     };
   }, []);
-
   return (
     <div>
       <h1> Timer: {count}</h1>
-      <ul>{posts}</ul>
+      <ul>
+        {questions.map((question) => (
+          <div>
+            <Post key={question.id} {...question} />
+          </div>
+        ))}
+      </ul>
     </div>
   );
 }
 
-export async function getStaticProps() {
-  const posts = fetch(`http://localhost:3000/api/questions`).then((r) =>
-    r.json()
-  );
-  console.log(posts, "ssss");
+export const getStaticProps = async () => {
   return {
-    props: { posts },
+    props: {
+      questions: questionData,
+    },
   };
-}
+};

@@ -1,39 +1,33 @@
 import Link from "next/Link";
+import { questionData } from "../../questions";
 
-const Post = ({ post }) => {
-  console.log();
+const Post = ({ quest }) => {
   return (
     <>
       <main>
         <Link href="/">
           <a>Home Page</a>
         </Link>
-        <h1>{post.title}</h1>
-        <p>{post.body}</p>
+        <h1>{quest.question}</h1>
+        <p>{quest.trueAnswer}</p>
       </main>
     </>
   );
 };
-export async function getStaticPaths() {
-  const posts = await fetch(`http://localhost:3000/api/questions`).then((r) =>
-    r.json()
-  );
+export const getStaticPaths = async () => {
+  const paths = questionData.map((quest) => ({
+    params: { id: quest.id.toString() },
+  }));
 
+  return { paths, fallback: false };
+};
+
+export const getStaticProps = async ({ params }) => {
+  const que = questionData.filter((p) => p.id.toString() === params.id);
   return {
-    paths: posts.map((post) => ({
-      params: { id: post.id.toString() },
-    })),
-    fallback: false,
+    props: {
+      quest: que[0],
+    },
   };
-}
-
-export async function getStaticProps(context) {
-  const post = await fetch(
-    `http://localhost:3000/api/questions${context.params.id}`
-  ).then((r) => r.json());
-
-  return {
-    props: { post },
-  };
-}
+};
 export default Post;
