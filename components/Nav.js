@@ -13,7 +13,7 @@ const Nav = () => {
         </li>
 
         <li>
-          <Link href="/questions ">
+          <Link href="/questionPage ">
             <a> Questions </a>
           </Link>
         </li>
