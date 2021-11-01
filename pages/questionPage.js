@@ -1,20 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { questionData } from "../questions";
-import { Button, Card, Drawer, Row, Col, message, Radio } from "antd";
+import { Row, Col, Button, Card, Drawer, message, Radio } from "antd";
 import "antd/dist/antd.css";
 import styles from "../styles/Question.module.css";
 
 function questionPage({ questions }) {
   const [count, setCount] = useState(0);
   const [values, setValues] = useState([]);
+
   const [trueValue, setTrueValue] = useState(0);
+
   const [fifty, setFifty] = useState(false);
   const [fiftyValue, setFiftyValue] = useState(null);
+
   const [disable, setDisable] = useState(false);
   const [disable2, setDisable2] = useState(false);
+
   const [showAnswer, setShowAnswer] = useState(false);
+
   const [visible, setVisible] = useState(false);
-  const [lastValue, setLastValue] = useState();
+
+  const [visibleJoker, setVisibleJoker] = useState(false);
 
   useEffect(() => {
     //TODO : Bu alanda(useeeffect de) ben (bekir) yardım ettim. Musa abi haberin olsun. :)
@@ -36,9 +42,15 @@ function questionPage({ questions }) {
       setTrueValue(trueValue + 1);
     }
   };
-
   const onClose = () => {
     setVisible(false);
+  };
+
+  const Joker = () => {
+    setVisibleJoker(true);
+  };
+  const jokerClose = () => {
+    setVisibleJoker(false);
   };
 
   const backClick = () => {
@@ -52,10 +64,12 @@ function questionPage({ questions }) {
   const answerClick = () => {
     setShowAnswer(true);
     setDisable2(true);
+    setVisibleJoker(false);
   };
   const fiftyClick = () => {
     setFifty(true);
     setDisable(true);
+    setVisibleJoker(false);
   };
   const nextClick = () => {
     console.log(questions.length - 2, "questions.length");
@@ -86,7 +100,7 @@ function questionPage({ questions }) {
 
   return (
     <div className={styles.container}>
-      <Button onClick={backClick}> BACK</Button>
+      <Button onClick={Joker}>Joker</Button>
 
       <Card className={styles.card}>
         {count + 1}
@@ -111,20 +125,34 @@ function questionPage({ questions }) {
           <h4>true answer : {questions[count].trueAnswer} </h4>
         ) : null}
       </Card>
-      <Button onClick={nextClick} disabled={count === questions.length - 1}>
-        NEXT
-      </Button>
-      <Button onClick={fiftyClick} disabled={disable}>
-        %50
-      </Button>
-      <Button onClick={answerClick} disabled={disable2}>
-        trueShow
-      </Button>
-      <Button type="primary" onClick={showDrawer}>
-        finish
-      </Button>
+
+      <Row>
+        <Col span={8} push={2}>
+          <Button onClick={backClick}> BACK</Button>
+        </Col>
+
+        <Col span={8}>
+          <Button onClick={nextClick} disabled={count === questions.length - 1}>
+            NEXT
+          </Button>
+        </Col>
+        <Col offset={4}>
+          <Button type="primary" onClick={showDrawer}>
+            finish
+          </Button>
+        </Col>
+      </Row>
       <Drawer placement="top" onClose={onClose} visible={visible}>
         <h1>correct numbers: {trueValue} </h1>
+      </Drawer>
+
+      <Drawer placement="left" onClose={jokerClose} visible={visibleJoker}>
+        <Button onClick={fiftyClick} disabled={disable}>
+          %50
+        </Button>
+        <Button onClick={answerClick} disabled={disable2}>
+          trueShow
+        </Button>
       </Drawer>
     </div>
   );
