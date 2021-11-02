@@ -46,21 +46,20 @@ function testEklePage() {
         {...Layout}
         onFinish={onFinish}
         initialValues={{
-          soru: "",
+          questions: "",
           trueAnswer: "",
-          answer: [],
+          answers: [],
         }}
         style={{
           height: "400px",
           width: "600px",
-          border: "3px solid white",
+          border: "3px  ",
           padding: "50px",
           margin: "25px 50px 75px 10px",
           borderRadius: "10px",
-          boxShadow: "3px 3px 3px 3px rgba(238, 210, 204, 0.3)",
         }}
       >
-        <Form.Item label="Soru" name="soru">
+        <Form.Item label="question" name="questions">
           <Input></Input>
         </Form.Item>
         <FormItem label="True Answer" name="trueAnswer">
@@ -75,12 +74,11 @@ function testEklePage() {
           ></Select>
         </Form.Item>
         <Form.Item>
-          <Button type="dashed" onClick={submitButton} ghost htmlType="submit">
+          <Button type="dashed" onClick={submitButton} htmlType="submit">
             Submit
           </Button>
         </Form.Item>
       </Form>
-      add
     </div>
   );
 }

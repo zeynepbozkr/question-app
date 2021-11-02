@@ -30,8 +30,8 @@ export default function Home() {
     <div>
       <div
         style={{
-          boxShadow: "3px 3px 3px 3px",
-          border: "3px solid ",
+          backgroundColor: "white",
+          border: "3px  ",
           borderRadius: "3%",
           width: "800px",
           height: "80px",
@@ -52,9 +52,7 @@ export default function Home() {
           </Col>
           <Col span={4} offset={6}>
             <h4>
-              <HourglassTwoTone
-                style={{ fontSize: "16px", color: "blue" }}
-              ></HourglassTwoTone>
+              <HourglassTwoTone style={{ fontSize: "16px" }}></HourglassTwoTone>
               Dk
             </h4>
 
@@ -70,7 +68,7 @@ export default function Home() {
           </Col>
 
           <Col span={4} offset={2} style={{ padding: "10px" }}>
-            <Button>Teste Başla</Button>
+            <Button style={{ backgroundColor: "5FBFBB" }}>Teste Başla</Button>
           </Col>
         </Row>
       </div>

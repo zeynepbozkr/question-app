@@ -7,12 +7,13 @@
 
 .card {
   margin: 1rem;
-  padding: 50px;
+  padding: 1.5rem;
   text-align: center;
   text-decoration: none;
-  border: "3px solid ";
+  border: 1px solid #eaeaea;
   border-radius: 10px;
+  transition: color 0.15s ease, border-color 0.15s ease;
   width: 800px;
-  height: 400px;
-  border: 3px solid;
+  background-color: white;
+  height: 300px;
 }
