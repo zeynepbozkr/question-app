@@ -59,18 +59,18 @@ function testEklePage() {
           borderRadius: "10px",
         }}
       >
-        <Form.Item label="question" name="questions">
-          <Input></Input>
+        <Form.Item name="questions">
+          <Input placeholder="question"></Input>
         </Form.Item>
-        <FormItem label="True Answer" name="trueAnswer">
-          <Input></Input>
+        <FormItem name="trueAnswer">
+          <Input placeholder="True Answer"></Input>
         </FormItem>
 
-        <Form.Item label=" Answer" name="answers">
+        <Form.Item name="answers">
           <Select
             mode="tags"
             style={{ width: "100%" }}
-            placeholder="Tags Mode"
+            placeholder=" Answer"
           ></Select>
         </Form.Item>
         <Form.Item>

@@ -22,22 +22,36 @@ import {
 } from "@ant-design/icons";
 
 export default function Home() {
+  const [localData, setLocalData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let arr = localStorage.getItem("test");
+    arr = JSON.parse(arr);
+    console.log(arr.length, "ARRRR");
+    setLocalData(arr);
+    setLoading(false);
+  }, []);
+
   var today = new Date();
   var date =
     today.getFullYear() + "/" + (today.getMonth() + 1) + "/" + today.getDate();
 
-  return (
+  return loading ? (
+    <h1>Loading </h1>
+  ) : (
     <div>
       <div
         style={{
           backgroundColor: "white",
           border: "3px  ",
-          borderRadius: "3%",
-          width: "800px",
-          height: "80px",
+          borderRadius: "15px",
+          width: "1000px",
+          height: "100px",
+          textAlign: "center",
         }}
       >
-        <Row style={{ margin: "center" }} style={{ padding: "10px" }}>
+        <Row>
           <Col
             span={2}
             style={{
@@ -53,22 +67,22 @@ export default function Home() {
           <Col span={4} offset={6}>
             <h4>
               <HourglassTwoTone style={{ fontSize: "16px" }}></HourglassTwoTone>
-              Dk
+              {(localData.length * 45) / 60} dk
             </h4>
 
             <p>
-              <CheckCircleTwoTone twoToneColor="#eb2f96" /> {date}
+              <CheckCircleTwoTone /> {date}
             </p>
           </Col>
           <Col span={2}>
             <p>
               <SnippetsTwoTone />
-              soru sayısı
+              {localData.length} soru
             </p>
           </Col>
 
-          <Col span={4} offset={2} style={{ padding: "10px" }}>
-            <Button style={{ backgroundColor: "5FBFBB" }}>Teste Başla</Button>
+          <Col span={4} offset={2} style={{ padding: "15px" }}>
+            <Button>Teste Başla</Button>
           </Col>
         </Row>
       </div>
