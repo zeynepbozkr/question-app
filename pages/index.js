@@ -2,57 +2,78 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import React, { useState, useEffect } from "react";
 import "antd/dist/antd.css";
-import { questionData } from "../questions";
-import { Button, Menu, SubMenu, Input, message, Radio } from "antd";
+import {
+  Button,
+  Menu,
+  SubMenu,
+  Input,
+  message,
+  Radio,
+  Card,
+  Col,
+  Icon,
+  Row,
+} from "antd";
+import {
+  EditTwoTone,
+  HourglassTwoTone,
+  SnippetsTwoTone,
+  CheckCircleTwoTone,
+} from "@ant-design/icons";
 
-export default function Home({ questions }) {
-  const [count, setCount] = useState(0);
-  const i = Math.floor(Math.random() * questions.length);
-
-  const [values, setValues] = useState(0);
-  const [trueValue, setTrueValue] = useState(0);
-  // const [loading, setLoading] = useState(true);
-  // const [choose, setChoose] = useState();
-
-  const onChange = (e) => {
-    console.log(values, "value");
-    setValues(e.target.value);
-    let change = e.target.value;
-
-    localStorage.setItem("question", change);
-    console.log(change, "cccc");
-  };
-
-  const nextClick = () => {
-    console.log(questions[i].trueAnswer, "true");
-    if (count !== questions.length) {
-      setCount(count + 1);
-    } else {
-      message.success("Completed");
-    }
-
-    if (values === questions[i].trueAnswer) {
-      setTrueValue(trueValue + 1);
-    }
-    console.log(trueValue, "truevalue");
-  };
+export default function Home() {
+  var today = new Date();
+  var date =
+    today.getFullYear() + "/" + (today.getMonth() + 1) + "/" + today.getDate();
 
   return (
     <div>
-      {count} <br />
-      What mean {questions[i].question}
-      <br />
-      <Radio.Group options={questions[i].answer} onChange={onChange} />
-      {trueValue}
-      <Button onClick={nextClick}> NEXT</Button>
+      <div
+        style={{
+          boxShadow: "3px 3px 3px 3px",
+          border: "3px solid ",
+          borderRadius: "3%",
+          width: "800px",
+          height: "80px",
+        }}
+      >
+        <Row style={{ margin: "center" }} style={{ padding: "10px" }}>
+          <Col
+            span={2}
+            style={{
+              padding: "18px",
+            }}
+          >
+            <EditTwoTone />
+          </Col>
+          <Col span={4}>
+            <h3> TEST 1 </h3>
+            <p> test soruları </p>
+          </Col>
+          <Col span={4} offset={6}>
+            <h4>
+              <HourglassTwoTone
+                style={{ fontSize: "16px", color: "blue" }}
+              ></HourglassTwoTone>
+              Dk
+            </h4>
+
+            <p>
+              <CheckCircleTwoTone twoToneColor="#eb2f96" /> {date}
+            </p>
+          </Col>
+          <Col span={2}>
+            <p>
+              <SnippetsTwoTone />
+              soru sayısı
+            </p>
+          </Col>
+
+          <Col span={4} offset={2} style={{ padding: "10px" }}>
+            <Button>Teste Başla</Button>
+          </Col>
+        </Row>
+      </div>
     </div>
   );
 }
-
-export const getStaticProps = async () => {
-  return {
-    props: {
-      questions: questionData,
-    },
-  };
-};

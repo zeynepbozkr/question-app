@@ -66,11 +66,13 @@ function questionPage({ questions }) {
     setDisable2(true);
     setVisibleJoker(false);
   };
+
   const fiftyClick = () => {
     setFifty(true);
     setDisable(true);
     setVisibleJoker(false);
   };
+
   const nextClick = () => {
     console.log(questions.length - 2, "questions.length");
     if (count === questions.length - 2) {
@@ -150,9 +152,16 @@ function questionPage({ questions }) {
         <Button onClick={fiftyClick} disabled={disable}>
           %50
         </Button>
+        <br /> <br />
         <Button onClick={answerClick} disabled={disable2}>
           trueShow
         </Button>
+        <br /> <br /> <br />
+        <box>
+          {disable && disable2 ? (
+            <p style={{ backgroundColor: "#ee9ca7" }}>your jokers are over</p>
+          ) : null}
+        </box>
       </Drawer>
     </div>
   );

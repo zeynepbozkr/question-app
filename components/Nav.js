@@ -17,6 +17,11 @@ const Nav = () => {
             <a> Questions </a>
           </Link>
         </li>
+        <li>
+          <Link href="/testEklePage">
+            <a> Test Ekle </a>
+          </Link>
+        </li>
       </ul>
     </nav>
   );
